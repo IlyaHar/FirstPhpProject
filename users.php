@@ -1,5 +1,5 @@
 <?php
-if (!isset($_COOKIE['auth'])) {
+if (!isset($_COOKIE['login'])) {
     header('Location: error.php');
     exit();
 }
@@ -30,7 +30,7 @@ require "blocks/head.php"
         foreach ($users as $user):   
         ?>
 
-        <div class="user_block" id="user_info<?= $user->id ?>">
+        <div class="user_block" id="<?= $user->id ?>">
             <div>
             <span><strong>Имя: </strong><?= $user->name ?></span>
             <span><strong>Логин: </strong><?= $user->login ?></span>
@@ -54,7 +54,7 @@ require "blocks/head.php"
                 },
                 dataType: 'html',
                 success: function(data) {
-                    $("#user_info" + id).remove();
+                    $('#' + id).remove();
                 }
             });
         }

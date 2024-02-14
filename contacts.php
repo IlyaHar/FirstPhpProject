@@ -1,57 +1,55 @@
 <!DOCTYPE html>
 <html lang="ru">
 <?php
-$website_title = "Регистрация";
+$website_title = "Контакти";
 require "blocks/head.php"
 ?>
 
 <body>
     <?php require "blocks/header.php" ?>
     <main>
-        <h1>Регистрация</h1>
+        <h1>Обратная связь</h1>
         <div class="success_mess" id="success_block"></div>
-        <form id="register_form">
+        <form id="contact_form">
             <label for="username">Ваше имя</label>
             <input type="text" name="username" id="username">
             <label for="email">Email</label>
             <input type="email" name="email" id="email">
-            <label for="login">Логин</label>
-            <input type="text" name="login" id="login">
-            <label for="password">Пароль</label>
-            <input type="password" name="password" id="password">
+            <label for="message">Сообщение</label>
+            <textarea name="message" id="message"></textarea>
+
             <div class="error_mess" id="error_block"></div>
-            <button type="button" id="reg_user">Зарегистрироваться</button>
+            <button type="button" id="send_mess">Отправить</button>
         </form>
     </main>
     <?php require "blocks/aside.php" ?>
     <?php require "blocks/footer.php" ?>
+
     <script>
-        $('#reg_user').click(function() {
+        $('#send_mess').click(function() {
             let username = $('#username').val();
             let email = $('#email').val();
-            let login = $('#login').val();
-            let password = $('#password').val();
+            let message = $('#message').val();
 
             $.ajax({
-                url: 'ajax/checkRegister.php',
+                url: 'ajax/checkContact.php',
                 type: 'POST',
                 cache: false,
                 data: {
                     'username': username,
                     'email': email,
-                    'login': login,
-                    'password': password
+                    'message': message
                 },
                 dataType: 'html',
                 success: function(data) {
                     if (data === "Done") {
-                        $('#reg_user').prop('disabled', true);
-                        $('#reg_user').text("Все готово");
-                        $('#reg_user').css('font-weight', '600');
+                        $('#send_mess').prop('disabled', true);
+                        $('#send_mess').text("Все готово");
+                        $('#send_mess').css('font-weight', '600');
                         $('#error_block').hide();
-                        $('#register_form').trigger('reset');
+                        $('#contact_form').trigger('reset');
                         $('#success_block').fadeIn();
-                        $('#success_block').text(`Поздравляем вас ${username} ! Вы успешно зарегистрировались!`);
+                        $('#success_block').text(`Вы успешно отправили сообщение!`);
                         setTimeout(function() {
                             $('#success_block').fadeOut();
                         }, 5000);
@@ -62,10 +60,7 @@ require "blocks/head.php"
                 }
             });
         });
-
     </script>
-
-    
 </body>
 
 </html>

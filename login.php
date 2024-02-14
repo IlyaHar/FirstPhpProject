@@ -8,7 +8,7 @@ require "blocks/head.php"
 <body>
     <?php require "blocks/header.php" ?>
     <main>
-        <?php if (!isset($_COOKIE['auth'])) : ?>
+        <?php if (!isset($_COOKIE['login'])) : ?>
             <h1>Авторизация</h1>
             <form id="login_form">
                 <label for="login">Логин</label>
@@ -19,7 +19,7 @@ require "blocks/head.php"
                 <button type="button" id="login_user">Войти</button>
             </form>
         <?php else : ?>
-            <h2><?= $_COOKIE['auth'] ?></h2>
+            <h2><?= $_COOKIE['login'] ?></h2>
             <form>
                 <button type="button" id="exit_user">Выйти</button>
             </form>

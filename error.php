@@ -13,6 +13,7 @@ require "blocks/head.php"
         </p>
     </main>
     <?php require "blocks/aside.php" ?>
+    <?php require "blocks/chat.php" ?>
     <?php require "blocks/footer.php" ?>
 </body>
 
